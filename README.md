@@ -13,11 +13,9 @@
 | first_name_kana     | string  | null: false |
 | birthday            | date    | null: false |
 
-
 ### Association
 
 - has_many :items
-- has_many :addresses
 - has_many :orders
 
 
@@ -30,7 +28,7 @@
 | category_id      | integer  | null: false |
 | condition_id     | integer  | null: false |
 | shipping_fee_id  | integer  | null: false |
-| shipping_from_id | integer  | null: false |
+| prefecture   _id | integer  | null: false |
 | day_to_ship_id   | integer  | null: false |
 | price            | integer  | null: false |
 | user             | references | null: false, foreign_key: true |
@@ -38,9 +36,10 @@
 ### Association
 
 - belongs_to :user
+- has_one :order
 
 
-## Address テーブル
+## Addresses テーブル
 
 | Column         | Type       | Options      |
 | ------         | ---------- | ------------ |
@@ -54,8 +53,7 @@
 
 ### Association
 
-- has_many :orders
-- belongs_to :user
+- belongs_to :order
 
 
 ## Orders テーブル
@@ -65,5 +63,6 @@
 | item       | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
+
 - belongs_to :item
+- has_one :address
