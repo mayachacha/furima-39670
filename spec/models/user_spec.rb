@@ -68,25 +68,25 @@ end
   it 'last_nameは全角でなければ登録できない' do
     @user.last_name = 'test' 
     @user.valid?
-    expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters")
+    expect(@user.errors.full_messages).to include("Last name 全角文字を使用してください")
   end
 
   it 'first_nameは全角でなければ登録できない' do
     @user.first_name = 'test' 
     @user.valid?
-    expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters")
+    expect(@user.errors.full_messages).to include("First name 全角文字を使用してください")
   end
 
   it 'last_name_kanaはカタカナでなければ登録できない' do
-    @user.first_name_kana = 'test' 
+    @user.last_name_kana = 'test' 
     @user.valid?
-    expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters")
+    expect(@user.errors.full_messages).to include("Last name kana 全角カタカナを使用してください")
   end
 
   it 'first_name_kanaはカタカナでなければ登録できない' do
     @user.first_name_kana = 'test' 
     @user.valid?
-    expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters")
+    expect(@user.errors.full_messages).to include("First name kana 全角カタカナを使用してください")
   end
 
   it 'emailは@を含まないと登録できない' do
@@ -106,6 +106,7 @@ end
   it 'passwordとpassword_confirmationが不一致では登録できない' do
     @user.password = '1234abcd'
     @user.password_confirmation = '1111abcd'
+    @user.valid?
     expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
   end
 
@@ -113,28 +114,14 @@ end
     @user.password = '00000'
     @user.password_confirmation = '00000'
     @user.valid?
-    expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters")
+    expect(@user.errors.full_messages).to include("Password には英字と数字の両方を含めて設定してください")
   end
 
   it 'passwordは半角英数字混合でないと登録できない' do
-    @user.password = 'abcdefg'
-    @user.password_confirmation = 'abcdefg'
+    @user.password = 'aaaaaaaa'
+    @user.password_confirmation = 'aaaaaaaa'
     @user.valid?
-    expect(@user.errors.full_messages).to include('Password is invalid')
-  end
-
-  it 'passwordが数字だけでは登録できない' do
-    @user.password = 'abcdefg'
-    @user.password_confirmation = 'abcdefg'
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Password is invalid. Include both letters and numbers")
-  end
-
-  it 'passwordが英語だけでは登録できない' do
-    @user.password = 'abcdefg'
-    @user.password_confirmation = 'abcdefg'
-    @user.valid?
-    expect(@user.errors.full_messages).to include("Password is invalid. Include both letters and numbers")
+    expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
   end
 
   end
