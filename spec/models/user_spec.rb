@@ -66,25 +66,25 @@ end
    end
 
   it 'last_nameは全角でなければ登録できない' do
-    @user.last_name = '名前' 
+    @user.last_name = 'test' 
     @user.valid?
     expect(@user.errors.full_messages).to include("Last name is invalid. Input full-width characters")
   end
 
   it 'first_nameは全角でなければ登録できない' do
-    @user.first_name = '名前' 
+    @user.first_name = 'test' 
     @user.valid?
     expect(@user.errors.full_messages).to include("First name is invalid. Input full-width characters")
   end
 
   it 'last_name_kanaはカタカナでなければ登録できない' do
-    @user.first_name_kana = 'ナマエ' 
+    @user.first_name_kana = 'test' 
     @user.valid?
     expect(@user.errors.full_messages).to include("Last name kana is invalid. Input full-width katakana characters")
   end
 
   it 'first_name_kanaはカタカナでなければ登録できない' do
-    @user.first_name_kana = 'ナマエ' 
+    @user.first_name_kana = 'test' 
     @user.valid?
     expect(@user.errors.full_messages).to include("First name kana is invalid. Input full-width katakana characters")
   end
