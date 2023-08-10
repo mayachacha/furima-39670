@@ -102,13 +102,27 @@ end
     expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
   end
 
-  it 'passwordは半角英数字混合でないと登録できない' do
+  it 'passwordは英字のみでは登録できない' do
     @user.password = 'aaaaaaaa'
     @user.password_confirmation = 'aaaaaaaa'
     @user.valid?
     expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
   end
 
+  it 'passwordは数字のみでは登録できない' do
+    @user.password = '11111111'
+    @user.password_confirmation = '11111111'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
   end
+  
+  it 'passwordは全角文字は登録できない' do
+    @user.password = 'ABcdefg'
+    @user.password_confirmation = 'ABcdefg'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
+  end
+
+end
 end
 end
