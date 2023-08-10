@@ -5,7 +5,7 @@ before do
   @user = FactoryBot.build(:user)
 end
 
-  # pending "add some examples to (or delete) #{__FILE__}"
+
 
   describe 'ユーザー新規登録' do
     
@@ -121,6 +121,21 @@ end
     @user.password_confirmation = 'ABcdefg'
     @user.valid?
     expect(@user.errors.full_messages).to include('Password is invalid. Include both letters and numbers')
+  end
+
+  it '重複したメールアドレスは登録できない' do
+    @user.save
+    another_user = FactoryBot.build(:user, email: @user.email)
+    another_user.valid?
+    expect(another_user.errors.full_messages).to include('Email has already been taken')
+  end
+
+
+  it 'passwordが6文字未満では登録できない' do
+    @user.password = 'abc12'
+    @user.password_confirmation = 'abc12'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
   end
 
 end
