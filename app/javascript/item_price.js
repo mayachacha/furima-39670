@@ -1,15 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
+function calculation (){
   const priceInput = document.getElementById("item-price");
-  
-  priceInput.addEventListener("input", () => {
-    const addTaxDom = document.getElementById("add-tax-price");
-    const addPofitDom = document.getElementById("profit");
-    
+  const taxPrice = document.getElementById("add-tax-price");
+  const profitPrice = document.getElementById("profit");
+
+  priceInput.addEventListener("keyup", () => {
     const price = parseFloat(priceInput.value);
     const tax = Math.floor(price * 0.1);
     const profit = price - tax;
-    
-    addTaxDom.textContent = tax.toLocaleString();
-    addPofitDom.textContent = profit.toLocaleString();
+
+    taxPrice.textContent = tax; // 修正
+    profitPrice.textContent = profit; // 修正
   });
-});
+}
+
+window.addEventListener('turbo:load', calculation);
