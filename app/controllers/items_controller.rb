@@ -10,10 +10,10 @@ end
 
 def create
   @item = Item.new(item_params)
-  if @item.image.attached? && @item.save
+  if @item.save
     redirect_to root_path
   else
-    render :new
+    render :new, status: :unprocessable_entity
   end
 end
 
@@ -24,3 +24,5 @@ params.require(:item).permit(:item_name, :description, :category_id, :condition_
 
 end
 end
+
+#  @item.image.attached? &&
