@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
 def index
+  @items = Item.includes(:user).order(created_at: :desc)
 end
 
 def new
@@ -10,7 +11,7 @@ end
 
 def create
   @item = Item.new(item_params)
-  if @item.save
+  if @item.save && @item.image.attached?
     redirect_to root_path
   else
     render :new, status: :unprocessable_entity
