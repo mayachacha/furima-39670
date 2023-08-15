@@ -53,7 +53,7 @@ app/assets/stylesheets/items/new.css %>
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
-        </div>{
+        </div>
         <%= f.collection_select(:condition_id, Condition.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
       </div>
     </div>
