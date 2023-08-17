@@ -22,11 +22,9 @@ end
 def show
 end
 
-
-
 def edit  
-  if current_user.id == @item.user_id && @item.order.present?
-  redirect_to root_path
+  if @item.order.present? || current_user.id != @item.user_id
+    redirect_to root_path
   end
 end
 
@@ -59,5 +57,3 @@ def set_item
 end
 
 end
-
-#  @item.image.attached? &&
