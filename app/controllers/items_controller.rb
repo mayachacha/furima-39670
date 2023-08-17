@@ -20,11 +20,12 @@ def create
 end
 
 def show
-
 end
 
+
+
 def edit  
-  unless current_user.id == @item.user_id
+  if current_user.id == @item.user_id && @item.order.present?
   redirect_to root_path
   end
 end

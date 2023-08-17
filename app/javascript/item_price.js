@@ -1,4 +1,5 @@
-function calculation (){
+window.addEventListener('turbo:load', () => {
+  if ( document.getElementById('item-price')!= null) {
   const priceInput = document.getElementById("item-price");
   const addTaxDom = document.getElementById("add-tax-price");
   const profitPrice = document.getElementById("profit");
@@ -10,7 +11,8 @@ function calculation (){
 
     addTaxDom.innerHTML = tax;
     profitPrice.innerHTML= profit;
-  });
+  })
 }
+  });
 
-window.addEventListener('turbo:load', calculation);
+
