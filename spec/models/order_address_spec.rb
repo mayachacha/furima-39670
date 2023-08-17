@@ -82,12 +82,6 @@ RSpec.describe OrderAddress, type: :model do
       expect(@order_address.errors.full_messages).to include("Phone number is not a number")
     end
 
-    it 'priceが空では保存できないこと' do
-      @order_address.price = nil
-      @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Price can't be blank")
-    end
-
     it 'tokenが空では保存できないこと' do
       @order_address.token = nil
       @order_address.valid?
